@@ -1,78 +1,72 @@
-# Image to DOCX Converter (OCR + AI)
+🚀 Image to DOCX Converter (Gemini Vision AI)
+A professional backend application built with FastAPI that converts images into structured, clean Word documents using state-of-the-art AI Vision.
 
-A backend application built with FastAPI that converts images into a clean Word document using OCR and AI.
+🌟 Project Overview
+This project leverages Google Gemini 1.5 Flash to perform high-accuracy OCR and text cleaning in one step. It transforms messy text from images into a polished, formatted DOCX file.
 
----
+Key Features:
+AI-Powered OCR: Uses Gemini Vision to "see" and read text more accurately than traditional OCR.
 
-## Project Description
+Automatic Formatting: AI cleans, fixes grammar, and organizes the text.
 
-This project allows users to upload images, extract text using OCR, clean and organize the text using ChatGPT, and download the result as a DOCX file.
+Batch Processing: Upload multiple images and get a single merged document.
 
----
+Flexible AI Backend: Designed to switch between Google Gemini and OpenAI (GPT-4o) easily.
 
-##  How It Works
+🛠️ Technologies Used
+Python 3.10+
 
-1. Upload images
-2. Extract text from images using OCR
-3. Clean and format text using AI
-4. Generate DOCX file
-5. Download the final document
+FastAPI: High-performance web framework.
 
----
+Google Gemini API: For Image-to-Text extraction.
 
-##  Technologies Used
+Requests: For fast, direct API communication.
 
-- Python
-- FastAPI
-- Tesseract OCR
-- OpenAI API
-- python-docx
+python-docx: To generate professional Word files.
 
----
-
-##  Project Structure
-
+📂 Project Structure
+Plaintext
 image_to_docx/
-├── api.py
-├── ocr.py
-├── chatgpt.py
-├── docx_generator.py
-├── images/
-├── output.docx
-├── .env
+├── api.py              # FastAPI routes and file handling
+├── ocr.py              # Logic for extracting text
+├── gemini_vision.py    # Direct API calls to Gemini Flash
+├── gemini_cleaner.py   # AI text processing and formatting
+├── docx_generator.py   # Word document styling and creation
+├── web/                # Frontend (HTML/JS)
+├── temp_docs/          # Temporary storage for generated files
+├── .env                # API Keys (Excluded from Git)
 └── README.md
+⚙️ Setup & Installation
+Clone the project:
 
+Bash
+git clone https://github.com/hasscode/Image_detector_to_Docx_website.git
+cd Image_detector_to_Docx_website
+Install Dependencies:
 
+Bash
+pip install -r requirements.txt
+Configure Environment Variables:
+Create a .env file in the root directory:
 
----
+مقتطف الرمز
+# Current AI Provider: Google Gemini
+GOOGLE_API_KEY=your_gemini_api_key_here
 
-##  Setup
+# Future AI Provider: OpenAI (Optional)
+# OPENAI_API_KEY=your_openai_api_key_here
+Run the Application:
 
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install fastapi uvicorn pytesseract pillow python-docx python-dotenv openai
+Bash
+uvicorn api:app --host 0.0.0.0 --port 10000
+🔄 Switching to OpenAI
+The project is designed to be Modular. To switch to OpenAI GPT-4o:
 
+Replace GOOGLE_API_KEY with OPENAI_API_KEY in your .env.
 
-# Environment Variables
+Update the ocr.py or gemini_cleaner.py to use the OpenAI Python SDK.
 
-Create a .env file in the project root:
-OPENAI_API_KEY=API KEY
+Update requirements.txt to include openai.
 
-# Run Project
-uvicorn api:app --reload
-
-
-# API Endpoints
-
-POST /upload-images
-
-Upload multiple images to the server
-
-POST /convert
-
-Extract text from images
-
-Clean text using AI
-
-Download the generated DOCX file
+📡 API Endpoints
+POST /convert: Accepts multiple images, processes them through AI, and returns a downloadable .docx file.
