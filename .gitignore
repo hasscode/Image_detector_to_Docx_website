@@ -1,0 +1,7 @@
+venv/
+.venv/
+__pycache__/
+.env
+images/
+temp_docs/
+*.docx
