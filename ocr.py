@@ -1,16 +1,24 @@
 import os
-from gemini_vision import image_to_text
+from gemini_vision import image_to_text       # تأكد من اسم الملف عندك
+from gpt_vision import image_to_text_gpt     # تأكد من اسم الملف عندك
 
-def extract_text_from_images(images_list: list) -> str:
+def extract_text_from_images(images_list: list, provider: str = "gemini") -> str:
     """
-    بتاخد قائمة من الصور (سواء مسارات أو ملفات مفتوحة) وبتحولها لنص
+    الدالة دي هي حلقة الوصل.. بتاخد قايمة الصور واسم الموديل
+    وترجع النص كامل.
     """
     full_text = ""
     
     for img_data in images_list:
-        # بننادي دالة Gemini اللي عملناها قبل كدة
-        text = image_to_text(img_data)
+        if provider == "gpt":
+            print("🚀 Calling ChatGPT-4o Vision...")
+            text = image_to_text_gpt(img_data)
+        else:
+            print("🚀 Calling Gemini Flash...")
+            text = image_to_text(img_data)
+            
         if text:
-            full_text += text + "\n\n" + ("="*30) + "\n\n"
+            # بنضيف فاصل بسيط بين نصوص الصور المختلفة
+            full_text += text + "\n\n" + ("-" * 30) + "\n\n"
             
     return full_text

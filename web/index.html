@@ -4,17 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Document Converter</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/static/style.css">
+
+
+
+
 </head>
 <body>
 
     <div class="container">
         <div class="logo">
-            <img src="logo.png" alt="Icon" onerror="this.src='https://cdn-icons-png.flaticon.com/512/281/281760.png'">
+            <img src="/static/logo.png" alt="Logo" onerror="this.src='https://cdn-icons-png.flaticon.com/512/281/281760.png'">
         </div>
         
-        <h2>Images To Docx</h2>
-        <p class="subtitle">حول صورك إلى مستندات Word احترافية في ثوانٍ</p>
+        <h2>AI Vision OCR</h2>
+        <p class="subtitle">اختر المحرك الذكي وحول صورك إلى Word</p>
+
+        <div class="model-toggle">
+            <input type="radio" id="gemini" name="provider" value="gemini" checked>
+            <label for="gemini">Gemini Flash</label>
+
+            <input type="radio" id="gpt" name="provider" value="gpt">
+            <label for="gpt">ChatGPT-4o</label>
+        </div>
         
         <div class="upload-area">
             <label for="images" class="file-label">
@@ -23,11 +35,13 @@
             <input type="file" id="images" multiple accept="image/*" onchange="updateFileName()">
         </div>
 
-        <button id="btn" onclick="startProcess()">رفع وتحويل الملفات</button>
+        <button id="btn" onclick="startProcess()">رفع وتحويل المستندات</button>
         
         <div id="status"></div>
     </div>
 
-    <script src="script.js"></script>
+    
+
+    <script src="/static/script.js"></script>
 </body>
 </html>

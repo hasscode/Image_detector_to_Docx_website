@@ -48,21 +48,103 @@ body {
     display: block;
 }
 
-h2 { margin: 0 0 0.5rem; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.subtitle { color: #94a3b8; font-size: 0.9rem; margin-bottom: 2rem; }
+h2 { 
+    margin: 0 0 0.5rem; 
+    background: linear-gradient(to right, #fff, #94a3b8); 
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent; 
+}
 
-.upload-area { border: 2px dashed rgba(255, 255, 255, 0.2); border-radius: 15px; padding: 25px; margin-bottom: 20px; cursor: pointer; transition: 0.3s; }
-.upload-area:hover { border-color: var(--primary); background: rgba(99, 102, 241, 0.05); }
+.subtitle { 
+    color: #94a3b8; 
+    font-size: 0.9rem; 
+    margin-bottom: 2rem; 
+}
 
-.file-label { cursor: pointer; display: block; width: 100%; height: 100%; }
-input[type="file"] { display: none; }
+.model-toggle {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    gap: 5px;
+}
+
+.model-toggle input[type="radio"] {
+    display: none;
+}
+
+.model-toggle label {
+    flex: 1;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+
+.model-toggle input[type="radio"]:checked + label {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.upload-area { 
+    border: 2px dashed rgba(255, 255, 255, 0.2); 
+    border-radius: 15px; 
+    padding: 25px; 
+    margin-top: 10px;
+    margin-bottom: 20px; 
+    cursor: pointer; 
+    transition: 0.3s; 
+}
+
+.upload-area:hover { 
+    border-color: var(--primary); 
+    background: rgba(99, 102, 241, 0.05); 
+}
+
+.file-label { 
+    cursor: pointer; 
+    display: block; 
+    width: 100%; 
+    height: 100%; 
+}
+
+input[type="file"] { 
+    display: none; 
+}
 
 button {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
-    color: white; border: none; width: 100%; padding: 14px; border-radius: 12px;
-    font-weight: bold; cursor: pointer; transition: 0.3s;
+    color: white; 
+    border: none; 
+    width: 100%; 
+    padding: 14px; 
+    border-radius: 12px;
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.3s;
 }
-button:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4); }
 
-.loader { display: inline-block; width: 12px; height: 12px; border: 2px solid #fff; border-bottom-color: transparent; border-radius: 50%; animation: rotation 1s linear infinite; margin-left: 8px; }
-@keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+button:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4); 
+}
+
+.loader { 
+    display: inline-block; 
+    width: 12px; 
+    height: 12px; 
+    border: 2px solid #fff; 
+    border-bottom-color: transparent; 
+    border-radius: 50%; 
+    animation: rotation 1s linear infinite; 
+    margin-left: 8px; 
+}
+
+@keyframes rotation { 
+    0% { transform: rotate(0deg); } 
+    100% { transform: rotate(360deg); } 
+}

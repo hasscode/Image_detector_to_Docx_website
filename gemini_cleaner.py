@@ -1,40 +1,38 @@
-# gemini_cleaner.py
-from google import genai
-from google.genai import types
+import requests
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# Initialize Gemini client
-client = genai.Client(api_key=os.getenv("GOOGLE_API_KEY"))
+API_KEY = os.getenv("GOOGLE_API_KEY")
 
 def clean_text_with_gemini(raw_text: str) -> str:
-    """
-    Clean OCR-extracted text using Google Gemini AI
-    """
     if not raw_text.strip():
         return ""
     
     try:
-        prompt = f"""Clean this OCR-extracted text. Fix spelling/grammar, remove artifacts, and format professionally:
+        # استخدمنا نفس الرابط اللي نفع معاك في الـ Vision بالظبط (gemini-flash-latest)
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key={API_KEY}"
 
-{raw_text}
+        payload = {
+            "contents": [{
+                "parts": [{
+                    "text": f"Clean and format this medical text professionally. Use bold for headers and fix any OCR errors:\n\n{raw_text}"
+                }]
+            }]
+        }
 
-Return only the cleaned text."""
-        
-        response = client.models.generate_content(
-            model='gemini-1.5-pro',
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                temperature=0.3,
-                max_output_tokens=8192,
-            )
-        )
-        
-        return response.text
-    
+        response = requests.post(url, json=payload)
+        result = response.json()
+
+        if response.status_code == 200:
+            # التأكد من مسار النتيجة في الـ JSON
+            return result['candidates'][0]['content']['parts'][0]['text']
+        else:
+            # هنا هنطبع الرسالة عشان لو فشل نعرف السبب الحقيقي (فلترة محتوى ولا اسم موديل)
+            print(f"❌ Cleaner Error {response.status_code}: {result.get('error', {}).get('message')}")
+            return raw_text
+
     except Exception as e:
-        print(f"❌ Gemini Error: {e}")
-        print("⚠️ Returning raw text...")
+        print(f"❌ Cleaner Request failed: {e}")
         return raw_text
