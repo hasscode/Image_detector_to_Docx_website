@@ -23,7 +23,7 @@ def image_to_text_gpt(image_input) -> str:
                 {
                     "role": "user",
                     "content": [
-                        {"type": "text", "text": "Extract all text from this image accurately."},
+                        {"type": "text", "text": "Extract all text from this image accurately. Maintain formatting. Return only the text."},
                         {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{image_data}"}}
                     ],
                 }
